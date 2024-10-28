@@ -3,7 +3,7 @@ package edu.grinnell.csc207.util;
 /**
  * An implementation of two-dimensional matrices.
  *
- * @author Your Name Here
+ * @author Alyssa Ryan
  * @author Samuel A. Rebelsky
  *
  * @param <T>
@@ -13,6 +13,7 @@ public class MatrixV0<T> implements Matrix<T> {
   // +--------+------------------------------------------------------
   // | Fields |
   // +--------+
+  Object[] vals;
 
   // +--------------+------------------------------------------------
   // | Constructors |
@@ -33,7 +34,14 @@ public class MatrixV0<T> implements Matrix<T> {
    *   If either the width or height are negative.
    */
   public MatrixV0(int width, int height, T def) {
-    // STUB
+    if(width<=0 || height<=0){
+      throw new NegativeArraySizeException();
+    } else {
+      vals = new Object[width*height];
+      for(int i=0; i<width*height; i++){
+        vals[i] = def;
+      }
+    }
   } // MatrixV0(int, int, T)
 
   /**
@@ -70,7 +78,9 @@ public class MatrixV0<T> implements Matrix<T> {
    *   If either the row or column is out of reasonable bounds.
    */
   public T get(int row, int col) {
-    return null;        // STUB
+    int index = row-1 * col;
+    index += col;
+    return vals[index];
   } // get(int, int)
 
   /**
@@ -87,7 +97,9 @@ public class MatrixV0<T> implements Matrix<T> {
    *   If either the row or column is out of reasonable bounds.
    */
   public void set(int row, int col, T val) {
-    // STUB
+    int index = row-1 * col;
+    index += col;
+    vals[index] = val;
   } // set(int, int, T)
 
   /**
