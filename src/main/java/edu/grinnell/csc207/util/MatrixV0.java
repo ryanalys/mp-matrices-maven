@@ -13,7 +13,7 @@ public class MatrixV0<T> implements Matrix<T> {
   // +--------+------------------------------------------------------
   // | Fields |
   // +--------+
-  Object[] vals;
+  Object[][] vals;
 
   // +--------------+------------------------------------------------
   // | Constructors |
@@ -34,14 +34,7 @@ public class MatrixV0<T> implements Matrix<T> {
    *   If either the width or height are negative.
    */
   public MatrixV0(int width, int height, T def) {
-    if(width<=0 || height<=0){
-      throw new NegativeArraySizeException();
-    } else {
-      vals = new Object[width*height];
-      for(int i=0; i<width*height; i++){
-        vals[i] = def;
-      }
-    }
+    //STUB
   } // MatrixV0(int, int, T)
 
   /**
@@ -78,9 +71,8 @@ public class MatrixV0<T> implements Matrix<T> {
    *   If either the row or column is out of reasonable bounds.
    */
   public T get(int row, int col) {
-    int index = row-1 * col;
-    index += col;
-    return vals[index];
+    //STUB
+    return null;
   } // get(int, int)
 
   /**
@@ -97,9 +89,7 @@ public class MatrixV0<T> implements Matrix<T> {
    *   If either the row or column is out of reasonable bounds.
    */
   public void set(int row, int col, T val) {
-    int index = row-1 * col;
-    index += col;
-    vals[index] = val;
+    //STUB
   } // set(int, int, T)
 
   /**
