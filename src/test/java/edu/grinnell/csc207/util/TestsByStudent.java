@@ -1,16 +1,15 @@
 package edu.grinnell.csc207.util;
 
-import static edu.grinnell.csc207.util.MatrixAssertions.assertMatrixEquals;
-
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * A variety of tests that cover all the methods MatrixV0
+ * 
+ * @author Alyssa Ryan
+ */
 public class TestsByStudent {
   Integer nine = Integer.valueOf(9);
   Integer four = Integer.valueOf(4);
