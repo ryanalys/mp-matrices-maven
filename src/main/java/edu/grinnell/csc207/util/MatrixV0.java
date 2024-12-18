@@ -13,10 +13,10 @@ public class MatrixV0<T> implements Matrix<T> {
   // +--------+------------------------------------------------------
   // | Fields |
   // +--------+
-  Object[][] vals;
+  Object[][] values;
   int rowSize;
   int colSize;
-  T def;
+  T defVal;
 
   // +--------------+------------------------------------------------
   // | Constructors |
@@ -40,14 +40,14 @@ public class MatrixV0<T> implements Matrix<T> {
     if (width < 0 || height < 0) {
       throw new NegativeArraySizeException();
     } //if
-    
+
     this.rowSize = height;
     this.colSize = width;
-    this.def = def;
-    this.vals = new Object[height][width];
+    this.defVal = def;
+    this.values = new Object[height][width];
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
-        vals[i][j] = def;
+        values[i][j] = def;
       } //for
     } //for
   } // MatrixV0(int, int, T)
@@ -90,7 +90,7 @@ public class MatrixV0<T> implements Matrix<T> {
     if ((this.rowSize < row) || (this.colSize < col)) {
       throw new IndexOutOfBoundsException();
     } //if
-    return (T) vals[row][col];
+    return (T) values[row][col];
   } // get(int, int)
 
   /**
@@ -110,7 +110,7 @@ public class MatrixV0<T> implements Matrix<T> {
     if ((this.rowSize < row) || (this.colSize < col)) {
       throw new IndexOutOfBoundsException();
     } //if
-    vals[row][col] = val;
+    values[row][col] = val;
   } // set(int, int, T)
 
   /**
@@ -148,20 +148,20 @@ public class MatrixV0<T> implements Matrix<T> {
     //Create the new row to insert
     Object[] newRow = new Object[this.colSize];
     for (int i = 0; i < this.colSize; i++) {
-      newRow[i] = def;
+      newRow[i] = this.defVal;
     } //for
 
-    //Create a new array to replace vals, with the new row
+    //Create a new array to replace values, with the new row
     Object[][] newVals = new Object[this.rowSize + 1][this.colSize];
     for (int i = 0; i < row; i++) {
-      newVals[i] = this.vals[i];
+      newVals[i] = this.values[i];
     } //for
     newVals[row] = newRow;
     for (int i = (row + 1); i < (this.rowSize + 1); i++) {
-      newVals[i] = this.vals[i - 1];
+      newVals[i] = this.values[i - 1];
     } //for
 
-    this.vals = newVals;
+    this.values = newVals;
 
     //Increase rowSize
     this.rowSize++;
@@ -196,14 +196,14 @@ public class MatrixV0<T> implements Matrix<T> {
     //Create a new array to replace vals, with the new row
     Object[][] newVals = new Object[this.rowSize + 1][this.colSize];
     for (int i = 0; i < row; i++) {
-      newVals[i] = this.vals[i];
+      newVals[i] = this.values[i];
     } //for
     newVals[row] = newRow;
     for (int i = (row + 1); i < (this.rowSize + 1); i++) {
-      newVals[i] = this.vals[i - 1];
+      newVals[i] = this.values[i - 1];
     } //for
 
-    this.vals = newVals;
+    this.values = newVals;
 
     //Increase rowSize
     this.rowSize++;
@@ -226,20 +226,20 @@ public class MatrixV0<T> implements Matrix<T> {
     Object[][] newVals = new Object[this.rowSize][this.colSize + 1];
     for (int i = 0; i < this.rowSize; i++) {
       Object[] newRow = new Object[this.colSize + 1];
-      
+
       for (int j = 0; j < col; j++) {
-        newRow[j] = this.vals[i][j];
+        newRow[j] = this.values[i][j];
       } //for
 
-      newRow[col] = this.def;
+      newRow[col] = this.defVal;
 
       for (int j = (col + 1); j < (this.colSize + 1); j++) {
-        newRow[j] = this.vals[i][j - 1];
+        newRow[j] = this.values[i][j - 1];
       } //for
       newVals[i] = newRow;
     } //for
 
-    vals = newVals;
+    this.values = newVals;
     this.colSize++;
   } // insertCol(int)
 
@@ -268,19 +268,19 @@ public class MatrixV0<T> implements Matrix<T> {
       Object[] newRow = new Object[colSize + 1];
       
       for (int j = 0; j < col; j++) {
-        newRow[j] = this.vals[i][j];
+        newRow[j] = this.values[i][j];
       } //for
 
       newRow[col] = vals[i];
 
       for (int j = (col + 1); j < (this.colSize + 1); j++) {
-        newRow[j] = this.vals[i][j - 1];
+        newRow[j] = this.values[i][j - 1];
       } //for
 
       newVals[i] = newRow;
     } //for
 
-    this.vals = newVals;
+    this.values = newVals;
     this.colSize++;
   } // insertCol(int, T[])
 
@@ -300,13 +300,13 @@ public class MatrixV0<T> implements Matrix<T> {
     
     Object[][] newVals = new Object[this.rowSize - 1][this.colSize];
     for (int i = 0; i < row; i++) {
-      newVals[i] = this.vals[i];
+      newVals[i] = this.values[i];
     } //for
     for(int i = (row + 1); i < (this.rowSize); i++) {
-      newVals[i - 1] = this.vals[i];
+      newVals[i - 1] = this.values[i];
     } //for
 
-    vals = newVals;
+    values = newVals;
     this.rowSize--;
   } // deleteRow(int)
 
@@ -328,15 +328,15 @@ public class MatrixV0<T> implements Matrix<T> {
     for (int i = 0; i < this.rowSize; i++) {
       Object[] newRow = new Object[this.colSize - 1];
       for (int j = 0; j < col; j++) {
-        newRow[j] = this.vals[i][j];
+        newRow[j] = this.values[i][j];
       } //for
       for (int j = (col + 1); j < (this.colSize); j++) {
-        newRow[j - 1] = this.vals[i][j];
+        newRow[j - 1] = this.values[i][j];
       } //for
       newVals[i] = newRow;
     } //for
 
-    vals = newVals;
+    this.values = newVals;
     this.colSize--;
   } // deleteCol(int)
 
@@ -369,7 +369,7 @@ public class MatrixV0<T> implements Matrix<T> {
 
     for (int i = startRow; i < endRow; i++) {
       for (int j = startCol; j < endCol; j++) {
-        this.vals[i][j] = val;
+        this.values[i][j] = val;
       } //for
     } //for
   } // fillRegion(int, int, int, int, T)
@@ -403,14 +403,14 @@ public class MatrixV0<T> implements Matrix<T> {
       throw new IndexOutOfBoundsException();
     } else if ((startCol >= this.colSize) || (endCol > this.colSize)) {
       throw new IndexOutOfBoundsException();
-    } //if  
-    
+    } //if
+
     int rowPosition = startRow;
     int colPosition = startCol;
     int count = 0;
 
     while ((rowPosition < endRow) && (colPosition < endCol)) {
-      this.vals[rowPosition][colPosition] = val;
+      this.values[rowPosition][colPosition] = val;
 
       count++;
       rowPosition = (startRow + (count * deltaRow));
@@ -427,10 +427,10 @@ public class MatrixV0<T> implements Matrix<T> {
    */
   @SuppressWarnings({"unchecked", "rawtypes"})
   public Matrix clone() {
-    Matrix<T> newMatrix = new MatrixV0(this.colSize, this.rowSize, this.def);
+    Matrix<T> newMatrix = new MatrixV0(this.colSize, this.rowSize, this.defVal);
     for (int i = 0; i < this.rowSize; i++) {
       for (int j = 0; j < this.colSize; j++) {
-        newMatrix.set(i, j, (T)this.vals[i][j]);
+        newMatrix.set(i, j, (T) this.values[i][j]);
       } //for
     } //for
     return newMatrix;
@@ -447,20 +447,20 @@ public class MatrixV0<T> implements Matrix<T> {
    */
   @SuppressWarnings("unchecked")
   public boolean equals(Object other) {
-    if (this.rowSize != ((MatrixV0<T>)other).height()) {
+    if (this.rowSize != ((MatrixV0<T>) other).height()) {
       return false;
-    } else if (this.colSize != ((MatrixV0<T>)other).width()) {
+    } else if (this.colSize != ((MatrixV0<T>) other).width()) {
       return false;
     } //if
 
     for (int i = 0; i < this.rowSize; i++) {
       for (int j = 0; j < this.colSize; j++) {
-        if (!(this.vals[i][j].equals(((MatrixV0<T>)other).get(i, j)))) {
+        if (!(this.values[i][j].equals(((MatrixV0<T>) other).get(i, j)))) {
           return false;
         } //if
       } //for
     } //for
-    
+
     return true;
   } // equals(Object)
 
