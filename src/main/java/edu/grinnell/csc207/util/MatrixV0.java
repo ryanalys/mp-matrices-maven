@@ -13,9 +13,21 @@ public class MatrixV0<T> implements Matrix<T> {
   // +--------+------------------------------------------------------
   // | Fields |
   // +--------+
+  /**
+   * Holds all of the values of the matrix.
+   */
   Object[][] values;
+  /**
+   * The number of rows in the matrix.
+   */
   int rowSize;
+  /**
+   * The number of columns in the matrix.
+   */
   int colSize;
+  /**
+   * The default value of the matrix.
+   */
   T defVal;
 
   // +--------------+------------------------------------------------
@@ -266,7 +278,7 @@ public class MatrixV0<T> implements Matrix<T> {
     Object[][] newVals = new Object[this.rowSize][this.colSize + 1];
     for (int i = 0; i < this.rowSize; i++) {
       Object[] newRow = new Object[colSize + 1];
-      
+
       for (int j = 0; j < col; j++) {
         newRow[j] = this.values[i][j];
       } //for
@@ -297,12 +309,12 @@ public class MatrixV0<T> implements Matrix<T> {
     if ((row < 0) || (row >= this.rowSize)) {
       throw new IndexOutOfBoundsException();
     } //if
-    
+
     Object[][] newVals = new Object[this.rowSize - 1][this.colSize];
     for (int i = 0; i < row; i++) {
       newVals[i] = this.values[i];
     } //for
-    for(int i = (row + 1); i < (this.rowSize); i++) {
+    for (int i = (row + 1); i < (this.rowSize); i++) {
       newVals[i - 1] = this.values[i];
     } //for
 
